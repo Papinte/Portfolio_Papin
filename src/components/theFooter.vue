@@ -35,7 +35,7 @@ footer{
         display: flex;
         flex-direction: row;
         justify-content: center;
-        margin-top: 70px;
+        margin-top: 100px;
 
 }
 img{

@@ -1,6 +1,8 @@
 <template>
     <theHeader />
     <main>
+        <TheModale v-bind:revele="revele" :toggleModale="toggleModale"></TheModale>
+        <div v-on:click="toggleModale" class="btn-modale"></div>
         <section class="banner">
             <!--Bannière-->
             <img class="banne__picture" src="@/assets/images/homePage/Web_dev_office.jpeg" title="Bannière" alt="Bannière avec des vagues de différente nuance de bleu">
@@ -8,9 +10,9 @@
             <h5>Développeur Web</h5>
         </section>
 
-        <section class="about" ref="presentation">
+        <section class="present" id="presentation">
             <!--A propos-->
-            <div class="about__text">
+            <div class="present__text">
                 <h2>Qui suis-je ?</h2>
                 <p>Salut ! Je suis Antoine Papin, 
                     un développeur web junior avec une passion pour 
@@ -23,17 +25,17 @@
             <img id="profil-pic" src="@/assets/images/homePage/profil-black-white.png" title="Photo de profil" alt="Photo en noir et blanc d'un homme debout en t-shirt et short, face à la mer">
         </section>
 
-        <section>
+        <section id="concept">
             <h2>Mes projets</h2>
             <div class="projects">
                 <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/CV_Antoine.png" title="Mon cv en ligne" alt="Image réduite d'un CV">
-                    <p>Voici mon CV en ligne</p>
+                    <img class="projects__img" src="@/assets/images/homePage/CV_Antoine.png" title="Mon cv en ligne" alt="Image réduite d'un CV" v-on:click="toggleModale">
+                    <p>Mon CV en ligne</p>
                 </a>
 
                 <a href="#">
                     <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges">
-                    <p>Voici mon cahier des charges</p>
+                    <p>Un cahier des charges</p>
                 </a>
 
                 <a href="#">
@@ -43,9 +45,9 @@
             </div>
     </section>
     <section>
-        <img id="background-form" src="@/assets/images/homePage/fond-753159.jpeg" title="Background du formulaire" alt="Fond de page stylisé avec des taches gris et des courbes">
+        <img id="background-form" src="@/assets/images/homePage/fond_input.jpeg" title="Background du formulaire" alt="Fond de page stylisé avec des taches gris et des courbes">
         
-            <form class="form-style" action="#" method="post">
+            <form id="contact" class="form-style" action="#" method="post">
 
                 <h2>Contactez moi</h2>
 
@@ -68,7 +70,14 @@
 <script setup>
     import theHeader from '@/components/theHeader.vue';
     import theFooter from '@/components/theFooter.vue';
+    
+    import { ref } from 'vue';
+import TheModale from '@/components/Modale.vue';
 
+const revele = ref(false);
+const toggleModale = () => {
+    revele.value = !revele.value;
+}
 </script>
 
 <style scoped>
@@ -116,7 +125,7 @@ h5{
     /* Fin de code pour la bannière et les titres*/ 
 
     /* Début de code pour la photo de profil et la présentation*/ 
-.about{
+.present{
     display: flex;
     flex-direction: row;
     justify-content: space-between;
@@ -127,11 +136,11 @@ h5{
     font-size: 1.3rem;
 }
 
-.about__text{
+.present__text{
     box-sizing: border-box;
     width: 500px;     
 }
-.about__text h2{
+.present__text h2{
     border-bottom: solid 2px gold;
 }
 
@@ -159,8 +168,19 @@ h5{
     filter: brightness(80%);
     border-radius: 25%;
 }
-    /*Fin de code pour l'importation des projets */
+.projects__img:hover{
+    filter: brightness(100%);
+    box-shadow: 3px 3px;
+}
 
+.projects a{
+    text-decoration: none;
+    text-align: center;
+    color:black;
+}
+/*Fin de code pour l'importation des projets */
+
+/*Debut de code du formulaire */
 #background-form{
     position: absolute;
     left: 0;
@@ -168,8 +188,9 @@ h5{
     height: auto;
     max-height: 700px;
     z-index: -1;
-    object-fit: cover;
-    opacity: 70%;
+
+    filter: brightness(70%);
+    opacity: 90%;
 }
 
 .form-style{
@@ -184,14 +205,15 @@ h5{
 .form-style h2{
     text-align: center;
     border: 3px solid gold;
-    border-radius: 10px
+    border-radius: 10px;
+    color: white;
 }
 .form-style input{
     border: none;
     background: rgb(235, 235, 235);
     margin: 20px;
     font-size: 1em;
-    box-shadow: 3px 3px 10px grey;
+    border-radius: 5px
 }
 
 .form-style textarea{
@@ -200,18 +222,17 @@ h5{
     background: rgb(235, 235, 235);
     margin: 20px;
     font-size: 1em;
-    box-shadow: 3px 3px 10px grey;
+    border-radius: 5px
 }
 button{
     margin-top: 10px;
-    background-color: black;
-    color: white;
+    background-color: gold;
+    color: black;
     align-self: flex-end;
     border: none;
     border-radius: 10px;
     padding: 5px 10px 5px 10px;
     font-size: 1em;
-    box-shadow: 3px 3px 10px grey;
 }
-
+/*Fin de code du formulaire */
 </style>

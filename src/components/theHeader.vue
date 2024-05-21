@@ -1,14 +1,12 @@
 <template>
   <header>
     <nav>
-      <a href="#" title="Logo entreprise">
         <img id="logo" src="../assets/images/logoAntoineNoir.png" alt="Logo de l'entreprise, c'est écrit le prénom Antoine en noir, souligner avec un trait doré">
-      </a>
 
       <ul>
-        <li><a href="#">Présentation</a></li>
-        <li><a href="#">Création</a></li>
-        <li><a href="#">Contact</a></li>
+        <li><a href="#presentation" id="scroll-link-presentation">Présentation</a></li>
+        <li><a href="#concept" id="scroll-link-concept">Créations</a></li>
+        <li><a href="#contact" id="scroll-link-contact">Contact</a></li>
       </ul>
     </nav>
   </header>
@@ -16,6 +14,40 @@
 </template>
     
 <script setup>
+import { onMounted } from 'vue';
+
+onMounted(() => {
+  const scrollLinkPresentation = document.getElementById('scroll-link-presentation');
+  const scrollLinkConcept = document.getElementById('scroll-link-concept');
+  const scrollLinkContact = document.getElementById('scroll-link-contact');
+
+  if (scrollLinkPresentation) {
+    scrollLinkPresentation.addEventListener('click', function(event){
+      event.preventDefault();
+      document.querySelector('#presentation').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  if (scrollLinkConcept) {
+    scrollLinkConcept.addEventListener('click', function(event){
+      event.preventDefault();
+      document.querySelector('#concept').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  }
+
+  if (scrollLinkContact) {
+    scrollLinkContact.addEventListener('click', function(event){
+      event.preventDefault();
+      document.querySelector('#contact').scrollIntoView({
+        behavior: 'smooth'
+      });
+    });
+  }
+});
 </script>
     
 <style scoped>
@@ -49,6 +81,7 @@ ul {
   list-style-type: none;
   font-size: 1.3rem;
 }
+
 a{
   font-family: "Titillium web";
   text-decoration: none;
