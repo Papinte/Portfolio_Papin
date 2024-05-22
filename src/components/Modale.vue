@@ -14,13 +14,15 @@
 
 export default {
     name: 'TheModale',
-    props: ['revele', 'toggleModale']
+    props: ['revele', 'toggleModale'],
+    
 }
 
 </script>
 
 
 <style>
+
 .bloc-modale {
     position: fixed;
     top: 0;

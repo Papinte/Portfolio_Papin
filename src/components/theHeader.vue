@@ -5,7 +5,7 @@
 
       <ul>
         <li><a href="#presentation" id="scroll-link-presentation">Présentation</a></li>
-        <li><a href="#concept" id="scroll-link-concept">Créations</a></li>
+        <li><a href="#concept" id="scroll-link-concept">Projets</a></li>
         <li><a href="#contact" id="scroll-link-contact">Contact</a></li>
       </ul>
     </nav>
@@ -87,8 +87,9 @@ a{
   text-decoration: none;
   color: black;
 }
-a:hover{
-  color: gold;
+a:active {
+  text-decoration: underline;
+  text-decoration-color: gold;
 }
 
 </style>

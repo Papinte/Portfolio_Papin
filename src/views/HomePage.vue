@@ -10,6 +10,11 @@
             <h5>Développeur Web</h5>
         </section>
 
+        <!--Bouton pour remonter en haut de la page-->
+        <div>
+            <button id="top-btn" title="Retour en haut">&#9650;</button>
+        </div>
+
         <section class="present" id="presentation">
             <!--A propos-->
             <div class="present__text">
@@ -34,12 +39,12 @@
                 </a>
 
                 <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges">
+                    <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges" v-on:click="toggleModale">
                     <p>Un cahier des charges</p>
                 </a>
 
                 <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire">
+                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire" v-on:click="toggleModale">
                     <p>Un espace de commentaire dynamique</p>
                 </a>
             </div>
@@ -72,15 +77,39 @@
     import theFooter from '@/components/theFooter.vue';
     
     import { ref } from 'vue';
-import TheModale from '@/components/Modale.vue';
+    import TheModale from '@/components/Modale.vue';
 
-const revele = ref(false);
-const toggleModale = () => {
+    const revele = ref(false);
+    const toggleModale = () => {
     revele.value = !revele.value;
-}
+    }
+    
+    document.addEventListener('DOMContentLoaded', function() {
+      // Sélectionne le bouton
+      const topBtn = document.getElementById('top-btn');
+
+      // Ajoute un écouteur d'événements sur le défilement de la fenêtre
+      window.addEventListener('scroll', function() {
+        // Vérifie la position de défilement de la page
+        if (window.scrollY > 200) {
+          topBtn.style.display = 'block';
+        } else {
+          topBtn.style.display = 'none';
+        }
+      });
+
+      // Ajoute un écouteur d'événements pour le clic sur le bouton
+      topBtn.addEventListener('click', function() {
+        // Fonction pour faire défiler vers le haut
+        window.scrollTo({top: 0, behavior: 'smooth'});
+      });
+    });
+
 </script>
 
+
 <style scoped>
+
     /* importation de la police pour l'ensemble de la page */
 main{
     font-family: "Titillium web";
@@ -224,7 +253,7 @@ h5{
     font-size: 1em;
     border-radius: 5px
 }
-button{
+#btn{
     margin-top: 10px;
     background-color: gold;
     color: black;
@@ -235,4 +264,18 @@ button{
     font-size: 1em;
 }
 /*Fin de code du formulaire */
+
+/*style du bouton pour remonter en haut de la page*/
+#top-btn{
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background-color: gold;
+    color: black;
+    border: none;
+    border-radius: 50%;
+    padding: 10px;
+    cursor: pointer;
+}
 </style>
