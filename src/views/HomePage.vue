@@ -49,22 +49,31 @@
                 </a>
             </div>
     </section>
+
     <section>
         <img id="background-form" src="@/assets/images/homePage/fond_input.jpeg" title="Background du formulaire" alt="Fond de page stylisé avec des taches gris et des courbes">
         
-            <form id="contact" class="form-style" action="#" method="post">
+        <!--Message d'erreur-->
+
+            <form id="contact" class="form-style" method="post">
 
                 <h2>Contactez moi</h2>
+                <div id="error-message">
+            <h3> &#10060; Tous les champs doivent être remplis</h3>
+        </div>
+        <div id="success-message">
+            <h3> &#10004; Votre message a bien été envoyé !</h3>
+        </div>
 
-                <input type="text" name="nom" id="nom" placeholder="Nom">
+                <input type="text" name="nom" id="last-name" placeholder="Nom">
 
-                <input type="text" name="prenom" id="prenom" placeholder="Prénom">
+                <input type="text" name="prenom" id="first-name" placeholder="Prénom">
 
                 <input type="text" name="Objet" id="objet" placeholder="Objet">
 
                 <textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
 
-                <button id="btn" type="submit">Envoyer</button>
+                <button id="bouton" type="submit">Envoyer</button>
             </form>
     </section>
 </main>
@@ -83,7 +92,7 @@
     const toggleModale = () => {
     revele.value = !revele.value;
     }
-    
+    // s'assurer que le script JavaScript s'exécute seulement après que le document HTML
     document.addEventListener('DOMContentLoaded', function() {
       // Sélectionne le bouton
       const topBtn = document.getElementById('top-btn');
@@ -105,6 +114,45 @@
       });
     });
 
+    document.addEventListener('DOMContentLoaded', function() {
+        function fieldcheck() {
+        let inputLastName = document.getElementById("last-name");
+        let inputFirstName = document.getElementById("first-name");
+        let inputObjet = document.getElementById("objet");
+        let inputMessage = document.getElementById("message");
+
+        const errorMessage =  document.getElementById("error-message");
+        if (inputLastName.value === "" || inputFirstName.value === "" || inputObjet.value === "" || inputMessage.value === ""){
+            errorMessage.style.display = "block";
+            return false;
+        } else {
+            errorMessage.style.display = "none";
+            return true;
+        }
+    }
+
+    function leaveMail() {
+        const successMessage = document.getElementById("success-message");
+
+        if(fieldcheck()) {
+        successMessage.style.display = "block";
+        }
+
+    }
+    const submitButton = document.getElementById("bouton");
+    submitButton.addEventListener("click", function(event) {
+        event.preventDefault(); 
+        if(fieldcheck()) {
+            leaveMail();
+
+        // Effacer les champs des inputs
+        document.getElementById("last-name").value = "";
+        document.getElementById("first-name").value = "";
+        document.getElementById("objet").value = "";
+        document.getElementById("message").value = "";
+        }
+    })
+    })
 </script>
 
 
@@ -209,6 +257,27 @@ h5{
 }
 /*Fin de code pour l'importation des projets */
 
+/*Message d'erreur*/
+#error-message{
+    display: flex;
+    background-color: rgb(255, 154, 154);
+    width: fit-content;
+    margin: auto;
+    padding: 0 10px 0 10px;
+    border-radius: 10px;
+    display: none;
+}
+/*Message de succes*/
+#success-message{
+    display: flex;
+    background-color: rgb(163, 255, 145);
+    width: fit-content;
+    margin: auto;
+    padding: 0 10px 0 10px;
+    border-radius: 10px;
+    display: none;
+}
+
 /*Debut de code du formulaire */
 #background-form{
     position: absolute;
@@ -217,7 +286,6 @@ h5{
     height: auto;
     max-height: 700px;
     z-index: -1;
-
     filter: brightness(70%);
     opacity: 90%;
 }
@@ -253,7 +321,7 @@ h5{
     font-size: 1em;
     border-radius: 5px
 }
-#btn{
+#bouton{
     margin-top: 10px;
     background-color: gold;
     color: black;
@@ -262,6 +330,9 @@ h5{
     border-radius: 10px;
     padding: 5px 10px 5px 10px;
     font-size: 1em;
+}
+#bouton:hover{
+    cursor: pointer;
 }
 /*Fin de code du formulaire */
 
@@ -278,4 +349,5 @@ h5{
     padding: 10px;
     cursor: pointer;
 }
+
 </style>

@@ -17,10 +17,12 @@
 import { onMounted } from 'vue';
 
 onMounted(() => {
+  // Récupéaration du menu
   const scrollLinkPresentation = document.getElementById('scroll-link-presentation');
   const scrollLinkConcept = document.getElementById('scroll-link-concept');
   const scrollLinkContact = document.getElementById('scroll-link-contact');
 
+  //Comportement de la page quand on clique sur un élément du menu
   if (scrollLinkPresentation) {
     scrollLinkPresentation.addEventListener('click', function(event){
       event.preventDefault();
