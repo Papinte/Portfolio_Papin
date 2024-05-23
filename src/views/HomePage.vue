@@ -137,6 +137,10 @@
         if(fieldcheck()) {
         successMessage.style.display = "block";
         }
+        //Le successMessage disparaît au bout de 8 secondes
+        setTimeout(function() {
+            successMessage.style.display = "none";
+        }, 8000);
 
     }
     const submitButton = document.getElementById("bouton");
