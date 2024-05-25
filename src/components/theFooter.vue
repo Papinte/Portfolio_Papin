@@ -5,7 +5,7 @@
                 <img src="../assets/images/theFooter/linkedin.png" alt="Logo du réseau social Linkedin">
             </a>
             <a href="https://github.com/Papinte" title="Github" target="_blank">
-                <img src="../assets/images/theFooter/github.png" alt="Logo du gestionnaire de version github">
+                <img src="@/assets/images/theFooter/github.png" alt="Logo du gestionnaire de version github">
             </a>
             <a href="https://twitter.com/" title="twitter" target="_blank">
                 <img src="../assets/images/theFooter/twitter.png" alt="Logo du réseau social X">

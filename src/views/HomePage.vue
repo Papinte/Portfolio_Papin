@@ -1,13 +1,12 @@
 <template>
     <theHeader />
     <main>
-        <TheModale v-bind:revele="revele" :toggleModale="toggleModale"></TheModale>
-        <div v-on:click="toggleModale" class="btn-modale"></div>
+        <ModaleContent :revele="revele" :toggleModale="toggleModale"></ModaleContent> 
         <section class="banner">
             <!--Bannière-->
             <img class="banne__picture" src="@/assets/images/homePage/Web_dev_office.jpeg" title="Bannière" alt="Bannière avec des vagues de différente nuance de bleu">
             <h1>ANTOINE PAPIN</h1>
-            <h5>Développeur Web</h5>
+            <h3>Développeur Web</h3>
         </section>
 
         <!--Bouton pour remonter en haut de la page-->
@@ -29,7 +28,6 @@
             </div>
             <img id="profil-pic" src="@/assets/images/homePage/profil-black-white.png" title="Photo de profil" alt="Photo en noir et blanc d'un homme debout en t-shirt et short, face à la mer">
         </section>
-
         <section id="concept">
             <h2>Mes projets</h2>
             <div class="projects">
@@ -39,12 +37,12 @@
                 </a>
 
                 <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges" v-on:click="toggleModale">
+                    <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges">
                     <p>Un cahier des charges</p>
                 </a>
 
                 <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire" v-on:click="toggleModale">
+                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire">
                     <p>Un espace de commentaire dynamique</p>
                 </a>
             </div>
@@ -77,6 +75,7 @@
             </form>
     </section>
 </main>
+
 <theFooter />
 
 </template>
@@ -86,12 +85,14 @@
     import theFooter from '@/components/theFooter.vue';
     
     import { ref } from 'vue';
-    import TheModale from '@/components/Modale.vue';
-
+    import ModaleContent from '@/components/TheModale.vue';
+    
     const revele = ref(false);
-    const toggleModale = () => {
-    revele.value = !revele.value;
+
+    function toggleModale() {
+        revele.value = !revele.value;
     }
+
     // s'assurer que le script JavaScript s'exécute seulement après que le document HTML
     document.addEventListener('DOMContentLoaded', function() {
       // Sélectionne le bouton
@@ -166,16 +167,15 @@
 main{
     font-family: "Titillium web";
     width: 100%;
+    height: auto;
 }
-    
-    
-
+  
     /* Début de code pour la bannière et les titres*/ 
 .banner{
     display: flex;
     flex-direction: column;
     align-items: center;
-    font-size: 3rem;
+    font-size: 4rem;
     color: white;
     margin: 50px
 }
@@ -185,9 +185,10 @@ main{
     border: solid 1px gold;
     box-sizing: border-box;
     width: auto;
+    margin-top: 50px;
 }
 
-h5{
+h3{
     border-bottom: 2px solid gold;
 }
 
@@ -267,7 +268,7 @@ h5{
     background-color: rgb(255, 154, 154);
     width: fit-content;
     margin: auto;
-    padding: 0 10px 0 10px;
+    padding: 0 5px 0 5px;
     border-radius: 10px;
     display: none;
 }
@@ -277,7 +278,7 @@ h5{
     background-color: rgb(163, 255, 145);
     width: fit-content;
     margin: auto;
-    padding: 0 10px 0 10px;
+    padding: 0 5px 0 5px;
     border-radius: 10px;
     display: none;
 }
