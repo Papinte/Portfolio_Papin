@@ -1,51 +1,56 @@
 <template>
-        <div class="bloc-modale-cv" v-if="revele">
 
-            <div class="overlay" v-on:click="toggleModale"></div>
+<div class="bloc-modale" v-if="reveleCv">
+    <div class="overlay" v-on:click="toggleModale('cv')"></div>
+    <div class="modale card">
+        <div class="btn-modale btn btn-danger" v-on:click="toggleModale('cv')">X</div>
+        <slot name="cv"></slot>
+    </div>
+</div>
 
-            <div class="modale card">
-                <div v-on:click="toggleModale" class="btn-modale btn btn-danger">X</div>
+<div class="bloc-modale" v-if="reveleCdg">
+    <div class="overlay" v-on:click="toggleModale('cdg')"></div>
+    <div class="modale card">
+        <div class="btn-modale btn btn-danger" v-on:click="toggleModale('cdg')">X</div>
+        <slot name="cdg"></slot>
+    </div>
+</div>
 
-                <div id="curriculum">
-                <img src="@/assets/images/Modale/cv-ligne/CV_Antoine.png" alt="Mon Cv en entier">
-                <div id="cv-text">
-                    <h2>Mon CV en ligne</h2>
-                    <p>03 avril 2024</p>
-                    <h5>Technologies utilisées :</h5>
-                    <p>HTML & CSS</p>
-                    <h5>Liens utiles :</h5>
-                    <p>Cliquez <a href="https://github.com/Papinte/Curriculum-Vit-" target="_blank"> ici</a> pour visiter mon GitHub</p>
-                </div>
-                </div>
-            </div>
-        </div>
+<div class="bloc-modale" v-if="reveleComment">
+    <div class="overlay" v-on:click="toggleModale('comment')"></div>
+    <div class="modale card">
+        <div class="btn-modale btn btn-danger" v-on:click="toggleModale('comment')">X</div>
+        <slot name="comment"></slot>
+    </div>
+</div>
+  </template>
 
-</template>
+<script setup>
+import { defineProps } from 'vue'
 
-<script>
-
-
-export default {
-    name:'ModaleContent',
-    props:['revele', 'toggleModale',]
-}
-
-
+defineProps({
+  reveleCv: Boolean,
+  reveleCdg: Boolean,
+  reveleComment: Boolean,
+  toggleModale: Function
+})
 </script>
 
+
+
 <style scoped>
-.bloc-modale-cv{
+
+.bloc-modale{
     position: fixed;
     top: 0;
     right: 0;
     bottom: 0;
     left: 0;
     display: flex;
-    flex-direction: row;
     justify-content: center;
     align-items: center;
+    z-index: 1;
 }
-
 .overlay{
     background: rgba(0, 0, 0, 0.5);
     position: fixed;
@@ -58,40 +63,12 @@ export default {
     background: #d6d6d6;
     color: black;
     padding: 50px;
-    display: flex;
-    flex-direction: row;
+    position: fixed;
 }
-
 .btn-modale{
     position: absolute;
     top: 10px;
     right: 10px;
-}
-
-#curriculum{
-    display: flex;
-    flex-direction: row;
-
-}
-
-#curriculum img{
-    width: 400px;
-    transition: transform .1s;
-    margin: 0 50px 0 0;
-}
-#curriculum img:hover{
-    cursor: zoom-in;
-    transform: scale(1.2);
-}
-
-#curriculum a{
-    text-decoration: none;
-    color: gold;
-}
-#curriculum h2{
-
-    text-decoration: underline;
-    text-decoration-color: gold;
 }
 
 </style>

@@ -1,7 +1,7 @@
 <template>
-    <theHeader />
+    
+    <router-view />
     <main>
-        <ModaleContent :revele="revele" :toggleModale="toggleModale"></ModaleContent> 
         <section class="banner">
             <!--Bannière-->
             <img class="banne__picture" src="@/assets/images/homePage/Web_dev_office.jpeg" title="Bannière" alt="Bannière avec des vagues de différente nuance de bleu">
@@ -14,7 +14,7 @@
             <button id="top-btn" title="Retour en haut">&#9650;</button>
         </div>
 
-        <section class="present" id="presentation">
+        <section class="present">
             <!--A propos-->
             <div class="present__text">
                 <h2>Qui suis-je ?</h2>
@@ -31,68 +31,130 @@
         <section id="concept">
             <h2>Mes projets</h2>
             <div class="projects">
-                <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/CV_Antoine.png" title="Mon cv en ligne" alt="Image réduite d'un CV" v-on:click="toggleModale">
-                    <p>Mon CV en ligne</p>
-                </a>
 
-                <a href="#">
+                <div>
+                    <img class="projects__img" src="@/assets/images/homePage/CV_Antoine.png" title="Mon cv en ligne" alt="Image réduite d'un CV" v-on:click="toggleModale('cv')">
+                    <p>Mon CV en ligne</p>
+
+                <TheModale :reveleCv="reveleCv" :toggleModale="toggleModale">
+                    <template v-slot:cv>
+                    <img class="projects__img" src="@/assets/images/homePage/CV_Antoine.png" title="Mon cv en ligne" alt="Image réduite d'un CV">
+                    <p>Mon CV en ligne</p>
+                </template>
+                </TheModale>
+                </div>
+
+                <div>
+                    <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges" v-on:click="toggleModale('cdg')">
+                    <p>Un cahier des charges</p>
+                    <TheModale :reveleCdg="reveleCdg" :toggleModale="toggleModale">
+                        <template v-slot:cdg>
                     <img class="projects__img" src="@/assets/images/homePage/CDG_Antoine.jpg" title="Mon cahier des charges" alt="Image réduite de la couverture d'un cahier des charges">
                     <p>Un cahier des charges</p>
-                </a>
+                    </template>
+                    </TheModale>
 
-                <a href="#">
-                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire">
+                </div>
+                <div>
+                    <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire" v-on:click="toggleModale('comment')">
                     <p>Un espace de commentaire dynamique</p>
-                </a>
+                    <TheModale :reveleComment="reveleComment" :toggleModale="toggleModale">
+                        <template v-slot:comment>
+                            <img class="projects__img" src="@/assets/images/homePage/comment-area-index.png" title="Espace commentaire" alt="Image réduite d'une page de site internet, avec des commentaire et un formulaire à remplir pour mettre son commentaire">
+                            <p>Un espace de commentaire dynamique</p>
+                        </template>
+                </TheModale>
+                </div>
+
             </div>
     </section>
 
     <section>
         <img id="background-form" src="@/assets/images/homePage/fond_input.jpeg" title="Background du formulaire" alt="Fond de page stylisé avec des taches gris et des courbes">
         
-        <!--Message d'erreur-->
-
-            <form id="contact" class="form-style" method="post">
-
+            <form id="contact" class="form-style" v-on:submit.prevent="submitForm">
                 <h2>Contactez moi</h2>
-                <div id="error-message">
-            <h3> &#10060; Tous les champs doivent être remplis</h3>
-        </div>
-        <div id="success-message">
-            <h3> &#10004; Votre message a bien été envoyé !</h3>
-        </div>
+        
+                <!--Message d'erreur-->
+    
+                <div id="openMessageEnvoi" v-if="openMessageEnvoi">
+                <h5> &#10060; Tous les champs doivent être remplis</h5>
+                </div>
+                <div id="confirmationMessage" v-if="confirmationMessage">
+                <h5>{{ confirmationMessage }}</h5>
+                </div>
 
-                <input type="text" name="nom" id="last-name" placeholder="Nom">
+                <input type="text" v-model="nom" placeholder="Nom">
 
-                <input type="text" name="prenom" id="first-name" placeholder="Prénom">
+                <input type="text" v-model="prenom" placeholder="Prénom">
 
-                <input type="text" name="Objet" id="objet" placeholder="Objet">
+                <input type="text" v-model="objet" placeholder="Objet">
 
-                <textarea name="message" id="message" cols="30" rows="10" placeholder="Message"></textarea>
+                <textarea v-model="message" cols="30" rows="10" placeholder="Message"></textarea>
 
                 <button id="bouton" type="submit">Envoyer</button>
             </form>
     </section>
 </main>
 
-<theFooter />
+
 
 </template>
 
 <script setup>
-    import theHeader from '@/components/theHeader.vue';
-    import theFooter from '@/components/theFooter.vue';
-    
     import { ref } from 'vue';
-    import ModaleContent from '@/components/TheModale.vue';
-    
-    const revele = ref(false);
+    import TheModale from "@/components/TheModale.vue";
 
-    function toggleModale() {
-        revele.value = !revele.value;
+    const reveleCv = ref(false);
+    const reveleCdg = ref(false);
+    const reveleComment = ref(false);
+
+    function toggleModale(modale) {
+        if (modale === 'cv') {
+            reveleCv.value = !reveleCv.value
+        } else if (modale === 'cdg') {
+            reveleCdg.value = !reveleCdg.value
+        } else if (modale === 'comment') {
+            reveleComment.value = !reveleComment.value
+        }
     }
 
+
+//Code pour le formulaire
+    const prenom = ref('');
+    const nom = ref('');
+    const objet = ref('');
+    const message = ref('');
+    const openMessageEnvoi = ref(false);
+    const confirmationMessage = ref('');
+
+    const submitForm = (event) => {
+        
+    event.preventDefault(); // Empêcher le comportement par défaut du formulaire
+
+    // Vérifier que tous les champs sont remplis
+    if (!prenom.value || !nom.value || !objet.value || !message.value) {
+        openMessageEnvoi.value = true; // Afficher le message d'erreur
+        return; // Arrêter l'exécution de la fonction
+    }
+
+    // Soumettre le formulaire et construire le message de confirmation
+    confirmationMessage.value = `Bonjour ${nom.value} ${prenom.value}! Votre message "${objet.value}" a été envoyé avec succès.`;
+    openMessageEnvoi.value = false; // Ne pas afficher le message d'erreur
+
+    // Simuler l'envoi de l'email ici, puis effacer le formulaire
+    clearForm();
+    };
+
+const clearForm = () => {
+    // Effacer les champs du formulaire et le message de confirmation
+    prenom.value = '';
+    nom.value = '';
+    objet.value = '';
+    message.value = '';
+};
+
+    //Code pour le bouton pour remonter la page
     // s'assurer que le script JavaScript s'exécute seulement après que le document HTML
     document.addEventListener('DOMContentLoaded', function() {
       // Sélectionne le bouton
@@ -115,61 +177,13 @@
       });
     });
 
-    document.addEventListener('DOMContentLoaded', function() {
-        function fieldcheck() {
-        let inputLastName = document.getElementById("last-name");
-        let inputFirstName = document.getElementById("first-name");
-        let inputObjet = document.getElementById("objet");
-        let inputMessage = document.getElementById("message");
 
-        const errorMessage =  document.getElementById("error-message");
-        if (inputLastName.value === "" || inputFirstName.value === "" || inputObjet.value === "" || inputMessage.value === ""){
-            errorMessage.style.display = "block";
-            return false;
-        } else {
-            errorMessage.style.display = "none";
-            return true;
-        }
-    }
-
-    function leaveMail() {
-        const successMessage = document.getElementById("success-message");
-
-        if(fieldcheck()) {
-        successMessage.style.display = "block";
-        }
-        //Le successMessage disparaît au bout de 8 secondes
-        setTimeout(function() {
-            successMessage.style.display = "none";
-        }, 8000);
-
-    }
-    const submitButton = document.getElementById("bouton");
-    submitButton.addEventListener("click", function(event) {
-        event.preventDefault(); 
-        if(fieldcheck()) {
-            leaveMail();
-
-        // Effacer les champs des inputs
-        document.getElementById("last-name").value = "";
-        document.getElementById("first-name").value = "";
-        document.getElementById("objet").value = "";
-        document.getElementById("message").value = "";
-        }
-    })
-    })
 </script>
 
 
 <style scoped>
 
-    /* importation de la police pour l'ensemble de la page */
-main{
-    font-family: "Titillium web";
-    width: 100%;
-    height: auto;
-}
-  
+
     /* Début de code pour la bannière et les titres*/ 
 .banner{
     display: flex;
@@ -228,7 +242,7 @@ h3{
 
 #profil-pic{
     width: 500px;
-    height: auto;
+
     border-radius: 50%;
 }
     /* Fin de code pour la photo de profil et la présentation*/ 
@@ -249,10 +263,12 @@ h3{
     object-fit: cover;
     filter: brightness(80%);
     border-radius: 25%;
+
 }
 .projects__img:hover{
     filter: brightness(100%);
     box-shadow: 3px 3px;
+    cursor: pointer;
 }
 
 .projects a{
@@ -263,24 +279,24 @@ h3{
 /*Fin de code pour l'importation des projets */
 
 /*Message d'erreur*/
-#error-message{
+#openMessageEnvoi{
     display: flex;
     background-color: rgb(255, 154, 154);
     width: fit-content;
     margin: auto;
     padding: 0 5px 0 5px;
     border-radius: 10px;
-    display: none;
+
 }
 /*Message de succes*/
-#success-message{
+#confirmationMessage{
     display: flex;
     background-color: rgb(163, 255, 145);
     width: fit-content;
     margin: auto;
     padding: 0 5px 0 5px;
     border-radius: 10px;
-    display: none;
+
 }
 
 /*Debut de code du formulaire */
