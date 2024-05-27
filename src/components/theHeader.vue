@@ -1,16 +1,14 @@
 <template>
-  <header>
     <nav>
         <img id="logo" src="../assets/images/logoAntoineNoir.png" alt="Logo de l'entreprise, c'est écrit le prénom Antoine en noir, souligner avec un trait doré">
 
       <ul>
+        <li><a href="/">Accueil</a></li>
         <li><a href="#presentation" id="scroll-link-presentation">Présentation</a></li>
         <li><a href="#concept" id="scroll-link-concept">Projets</a></li>
         <li><a href="#contact" id="scroll-link-contact">Contact</a></li>
       </ul>
     </nav>
-  </header>
-
 </template>
     
 <script setup>

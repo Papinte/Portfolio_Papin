@@ -13,7 +13,7 @@
         </div>
         <div id="update">
             <p>
-                <small>Dernier mise à jour le <time datetime="2024-05-20">20/05/2024</time></small> 
+                <small>Dernier mise à jour le <time datetime="2024-05-27">27/05/2024</time></small> 
             </p>
         </div>
     </footer>
@@ -29,23 +29,26 @@ footer{
     width: 100%;
     font-family: "Titillium web";
     background-color: #FFFFE0;
+    margin-top: 25px;
+
 }
 
 #img-link {
-        display: flex;
-        flex-direction: row;
-        justify-content: center;
-        margin-top: 100px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    margin: 0px 500px 0 500px;
+    padding-top: 20px;
 
 }
 img{
-        width: 40px;
-        padding: 20px 20px 0 20px;
+    width: 30px;
+
 }
 #update{
-        display: flex;
-        justify-content: center;
-        color: black;
+    display: flex;
+    justify-content: center;
+    color: black;
 }
 
 </style>

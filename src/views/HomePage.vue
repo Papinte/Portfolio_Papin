@@ -1,5 +1,7 @@
 <template>
-  <router-view />
+  <RouterView />
+    <TheHeader />
+    
   <main>
     <section class="banner">
       <!--Bannière-->
@@ -18,7 +20,7 @@
       <button id="top-btn" title="Retour en haut">&#9650;</button>
     </div>
 
-    <section class="present">
+    <section class="present" id="presentation">
       <!--A propos-->
       <div class="present__text">
         <h2>Qui suis-je ?</h2>
@@ -55,10 +57,11 @@
           <TheModale :reveleCv="reveleCv" :toggleModale="toggleModale">
             <template v-slot:cv>
               <div class="carousel" id="carousel-cv">
-                <button class="prev" @click="changeSlide(-1, 'carousel-cv')">
-                  ❮
-                </button>
-                <div class="slides">
+                
+                  <button class="prev" @click="changeSlide(-1, 'carousel-cv')">
+                    ❮
+                  </button>
+                  <div class="slides">
                   <img
                     class="modale-img"
                     src="@/assets/images/Modale/cv-ligne/CV_Antoine.png"
@@ -84,10 +87,11 @@
                     alt="Image réduite d'un CV"
                   />
                 </div>
-                <button class="next" @click="changeSlide(1, 'carousel-cv')">
-                  ❯
-                </button>
-              </div>
+                  <button class="next" @click="changeSlide(1, 'carousel-cv')">
+                    ❯
+                  </button>
+                
+            </div>
             </template>
           </TheModale>
         </div>
@@ -230,9 +234,15 @@
       </form>
     </section>
   </main>
+  <theFooter/>
+  <RouterLink to="/">Accueil</RouterLink>
+  <RouterLink to="/about">Erreur 404</RouterLink>
 </template>
 
 <script setup>
+import TheHeader from "@/components/theHeader.vue";
+import theFooter from "@/components/theFooter.vue";
+
 import { ref, reactive } from "vue";
 import TheModale from "@/components/TheModale.vue";
 
@@ -333,21 +343,24 @@ document.addEventListener("DOMContentLoaded", function () {
 </script>
 
 <style scoped>
-/*Code pour le carrousel d'image des modales*/
+
+/*Code carrousel d'image et modale*/
+
+.slides-text {
+  display: flex;
+  justify-content: space-between;
+}
 
 .modale-img {
-    object-fit: cover; /* ou 'contain' selon vos besoins */
-    width: 400px;
-    height: 100%;
-    transition: transform 0.25s ease;
+  object-fit: cover;
+  width: 400px;
+  height: 100%;
+  transition: transform 0.25s ease;
 }
 
-.modale-img:hover{
-    transform: scale(1.2);
-
-
+.modale-img:hover {
+  transform: scale(1.2);
 }
-
 
 .carousel {
   position: relative;
@@ -356,6 +369,7 @@ document.addEventListener("DOMContentLoaded", function () {
   margin: auto;
   overflow: hidden;
 }
+
 .slides {
   display: flex;
   transition: transform 0.5s ease-in-out;
@@ -391,18 +405,21 @@ document.addEventListener("DOMContentLoaded", function () {
   align-items: center;
   font-size: 4rem;
   color: white;
-  margin: 50px;
+  margin: 50px 50px 150px 50px;
+  
+
 }
 
 .banner h1 {
   padding: 0 50px 0 50px;
   border: solid 1px gold;
   box-sizing: border-box;
-  width: auto;
-  margin-top: 50px;
+  margin-top: 70px;
+  font-size: 1.2em;
 }
 
 h3 {
+  font-size: 0.8em;
   border-bottom: 2px solid gold;
 }
 
@@ -426,7 +443,7 @@ h3 {
   justify-content: space-between;
   align-items: center;
   background-color: rgb(228, 228, 228);
-  margin: 70px 70px 0 70px;
+  margin: 70px;
   padding: 30px;
   font-size: 1.3rem;
 }
@@ -441,7 +458,6 @@ h3 {
 
 #profil-pic {
   width: 500px;
-
   border-radius: 50%;
 }
 /* Fin de code pour la photo de profil et la présentation*/
@@ -452,7 +468,6 @@ h3 {
   flex-direction: row;
   justify-content: space-around;
   margin: 50px 0 50px 0;
-
   padding: 30px 0 30px 0;
 }
 .projects__img {
@@ -467,7 +482,9 @@ h3 {
   box-shadow: 3px 3px;
   cursor: pointer;
 }
-
+.projects p{
+    text-align: center;
+}
 .projects a {
   text-decoration: none;
   text-align: center;
@@ -516,10 +533,11 @@ h3 {
 }
 
 .form-style h2 {
-  text-align: center;
-  border: 3px solid gold;
-  border-radius: 10px;
-  color: white;
+    margin-top: 20px;
+    text-align: center;
+    border: 3px solid gold;
+    border-radius: 10px;
+    color: white;
 }
 .form-style input {
   border: none;
@@ -560,9 +578,7 @@ h3 {
   right: 20px;
   background-color: gold;
   color: black;
-  border: none;
   border-radius: 50%;
   padding: 10px;
-  cursor: pointer;
 }
 </style>
