@@ -1,14 +1,12 @@
 <template>
-<div>
-  <RouterLink to="/">HomePage</RouterLink>
-  <RouterLink to="/about">About</RouterLink>
-</div>
-<RouterView />
+
+    <RouterView />
+    
 
 </template>
 
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
+import {  RouterView,} from 'vue-router'
 
 
 

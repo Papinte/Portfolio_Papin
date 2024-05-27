@@ -1,35 +1,33 @@
-# Portfolio_Papin
+Mon PORTFOLIO
 
-This template should help get you started developing with Vue 3 in Vite.
+Découvrez mon univers créatif à travers mon portfolio, où je vous propose une présentation concise de mes compétences et de mon parcours. Explorez mes créations diverses et variées. Besoin de discuter d'un projet ou de collaborer ? Utilisez simplement le formulaire de contact pour entrer en communication. Bienvenue dans mon monde !
 
-## Recommended IDE Setup
+Prérequis
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Avant de commencer, assurez-vous d'avoir les éléments suivants installés sur votre machine :
+- Node.js
+- npm (Node Package Manager)
+- bootstrap
+- vue-router
 
-## Customize configuration
+Installation
+Suivez ces étapes pour installer et configurer le projet :
 
-See [Vite Configuration Reference](https://vitejs.dev/config/).
+1. Clonez ce dépôt sur votre machine :
+git clone https://github.com/Papinte/Portfolio_Papin.git
 
-## Project Setup
+2. Accédez au répertoire du projet :
+cd Portfolio_Papin
 
-```sh
+3. Installez les dépendances du projet avec npm :
 npm install
-```
 
-### Compile and Hot-Reload for Development
+Lancement
+Une fois que vous avez installé les dépendances, vous pouvez lancer l'application en suivant ces étapes :
 
-```sh
+1. Démarrez le serveur de développement :
 npm run dev
-```
 
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
-
-### Lint with [ESLint](https://eslint.org/)
-
-```sh
-npm run lint
-```
+Ouvrez votre navigateur et accédez à l'URL suivante :
+http://localhost:8080 (C'est un exemple, copiez celui qui sera indiqué)
+ou Si vous êtes sur Windows, gardez la touche Ctrl enfoncée et cliquez sur le lien.
